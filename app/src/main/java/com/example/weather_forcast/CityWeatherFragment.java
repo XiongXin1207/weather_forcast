@@ -1,5 +1,6 @@
 package com.example.weather_forcast;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,6 +77,7 @@ public class CityWeatherFragment extends com.example.weather_forcast.BaseFragmen
         }
         // 获取未来三天的天气情况,加载到layout当中
         WeatherBean.DataDTO.Forecast24hDTO futureList = resultsBean.getForecast24h();
+        // 明天
         View itemView_2 = LayoutInflater.from(getActivity()).inflate(R.layout.item_main_center, null);
         itemView_2.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         futureLayout.addView(itemView_2);
@@ -85,7 +87,7 @@ public class CityWeatherFragment extends com.example.weather_forcast.BaseFragmen
         dateTv_2.setText(futureList.get$2().getTime()+"明天");
         conTv_2.setText(futureList.get$2().getDayWeather());
         tempRangeTv_2.setText(futureList.get$2().getMinDegree()+"~"+futureList.get$2().getMaxDegree()+"℃");
-
+        // 后天
         View itemView_3 = LayoutInflater.from(getActivity()).inflate(R.layout.item_main_center, null);
         itemView_3.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         futureLayout.addView(itemView_3);
@@ -95,7 +97,7 @@ public class CityWeatherFragment extends com.example.weather_forcast.BaseFragmen
         dateTv_3.setText(futureList.get$3().getTime()+"后天");
         conTv_3.setText(futureList.get$3().getDayWeather());
         tempRangeTv_3.setText(futureList.get$3().getMinDegree()+"~"+futureList.get$3().getMaxDegree()+"℃");
-
+        // 外天
         View itemView_4 = LayoutInflater.from(getActivity()).inflate(R.layout.item_main_center, null);
         itemView_4.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
         futureLayout.addView(itemView_4);
@@ -105,8 +107,6 @@ public class CityWeatherFragment extends com.example.weather_forcast.BaseFragmen
         dateTv_4.setText(futureList.get$4().getTime()+"外天");
         conTv_4.setText(futureList.get$4().getDayWeather());
         tempRangeTv_4.setText(futureList.get$4().getMinDegree()+"~"+futureList.get$4().getMaxDegree()+"℃");
-
-
     }
 
     private void initView(View view){
@@ -134,22 +134,44 @@ public class CityWeatherFragment extends com.example.weather_forcast.BaseFragmen
 
     @Override
     public void onClick(View v) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         switch (v.getId()){
             case R.id.frag_index_tv_dress:
-
+                builder.setTitle("穿衣指数");
+                WeatherBean.DataDTO.IndexDTO.ClothesDTO cloth = indexList.getClothes();
+                String msg = cloth.getInfo()+"\n"+cloth.getDetail();
+                builder.setMessage(msg);
+                builder.setPositiveButton("确定",null);
                 break;
             case R.id.frag_index_tv_washcar:
-
+                builder.setTitle("洗车指数");
+                WeatherBean.DataDTO.IndexDTO.CarwashDTO car = indexList.getCarwash();
+                msg = car.getInfo()+"\n"+car.getDetail();
+                builder.setMessage(msg);
+                builder.setPositiveButton("确定",null);
                 break;
             case R.id.frag_index_tv_cold:
-
+                builder.setTitle("感冒指数");
+                WeatherBean.DataDTO.IndexDTO.ColdDTO cold = indexList.getCold();
+                msg = cold.getInfo()+"\n"+cold.getDetail();
+                builder.setMessage(msg);
+                builder.setPositiveButton("确定",null);
                 break;
             case R.id.frag_index_tv_sport:
-
+                builder.setTitle("运动指数");
+                WeatherBean.DataDTO.IndexDTO.SportsDTO sport = indexList.getSports();
+                msg = sport.getInfo()+"\n"+sport.getDetail();
+                builder.setMessage(msg);
+                builder.setPositiveButton("确定",null);
                 break;
             case R.id.frag_index_tv_rays:
-
+                builder.setTitle("紫外线指数");
+                WeatherBean.DataDTO.IndexDTO.UltravioletDTO rays = indexList.getUltraviolet();
+                msg = rays.getInfo()+"\n"+rays.getDetail();
+                builder.setMessage(msg);
+                builder.setPositiveButton("确定",null);
                 break;
         }
+        builder.create().show();
     }
 }
