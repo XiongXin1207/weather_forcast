@@ -2,10 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_out_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bg"
-    tools:context=".MainActivity">
+    android:background="@mipmap/bg" >
 
     <RelativeLayout
         android:id="@+id/main_bottom_layout"
@@ -21,21 +21,19 @@
             android:id="@+id/main_iv_more"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:src="@mipmap/icon_more"/>
+            android:src="@mipmap/icon_more"
+            android:layout_alignParentRight="true"/>
         <LinearLayout
             android:id="@+id/main_layout_point"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_centerInParent="true">
-        </LinearLayout>
+            android:layout_centerInParent="true"/>
     </RelativeLayout>
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/main_vp"
-        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_width="match_parent"
         android:layout_above="@id/main_bottom_layout">
     </androidx.viewpager.widget.ViewPager>
-
 </RelativeLayout>
