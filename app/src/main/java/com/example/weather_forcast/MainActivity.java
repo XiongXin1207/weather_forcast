@@ -4,11 +4,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewParent;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import com.example.weather_forcast.db.DBManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,13 +40,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         addCityIv.setOnClickListener(this);
         moreIv.setOnClickListener(this);
         fragmentList = new ArrayList<>();
-        cityList = new ArrayList<>();
+        cityList = DBManager.queryAllCityName();    // 获取数据库包含的城市信息列表
         imgList = new ArrayList<>();
 
         if(cityList.size()==0){
             cityList.add("北京");
-            cityList.add("上海");
-            cityList.add("天津");
         }
         // 初始化ViewPager页面的方法
         initPager();
@@ -106,13 +107,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        Intent intent = new Intent();
         switch (v.getId()){
             case R.id.main_iv_add:
-
+                intent.setClass(this,CityManagerActivity.class);
                 break;
             case R.id.main_iv_more:
 
                 break;
         }
+        startActivity(intent);
     }
 }

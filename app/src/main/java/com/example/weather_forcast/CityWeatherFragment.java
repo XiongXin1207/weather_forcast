@@ -2,6 +2,7 @@ package com.example.weather_forcast;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.weather_forcast.bean.WeatherBean;
+import com.example.weather_forcast.db.DBManager;
 import com.google.gson.Gson;
 
 
@@ -50,9 +52,20 @@ public class CityWeatherFragment extends com.example.weather_forcast.BaseFragmen
     public void onSuccess(String result) {
         // 解析并展示数据
         parseShowData(result);
+        // 更新数据
+        int i = DBManager.updateInfoByCity(city, result);
+        if(i<=0){
+            // 更新数据库失败,说明没有这条城市信息，增加这个城市记录
+            DBManager.addCityInfo(city, result);
+        }
     }
     @Override
     public void onError(Throwable ex, boolean isOnCallback) {
+        // 数据库当中查找上一次信息显示在Fragment中
+        String s = DBManager.queryInfoByCity(city);
+        if(!TextUtils.isEmpty(s)){
+            parseShowData(s);
+        }
     }
     private void parseShowData(String result) {
         // 使用Gson解析数据
