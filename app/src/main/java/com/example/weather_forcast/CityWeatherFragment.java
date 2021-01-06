@@ -14,15 +14,13 @@ import com.google.gson.Gson;
 
 public class CityWeatherFragment extends com.example.weather_forcast.BaseFragment implements View.OnClickListener{
     TextView tempTv, cityTv, conditionTv, windTv, tempRangeTv, dateTv,
-            clothIndexTv, carIndexTV, coldIndexTv, sportIndexTv, raysIndexTV, dayIv;
+            clothIndexTv, carIndexTV, coldIndexTv, sportIndexTv, raysIndexTV, dayIv, umbrellaIv;
     LinearLayout futureLayout;
     String url1 = "https://wis.qq.com/weather/common?source=pc&weather_type=observe|index|rise|alarm|air|tips|forecast_24h&province=";
     String url2 = "&city=";;
-    private WeatherBean.DataDTO.IndexDTO indexList;
     String province;
     String city;
-    Bundle bundle = getArguments();
-    String province_city = bundle.getString("city");
+    private WeatherBean.DataDTO.IndexDTO indexList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -30,6 +28,8 @@ public class CityWeatherFragment extends com.example.weather_forcast.BaseFragmen
         View view = inflater.inflate(R.layout.fragment_city_weather, container, false);
         initView(view);
         // 可以通过activity传值获取当前fragment加载的是哪个地方的天气情况
+        Bundle bundle = getArguments();
+        String province_city = bundle.getString("city");
         if(province_city.split(" ").length>1)
         {
             province =province_city.split(" ")[0];
@@ -64,8 +64,8 @@ public class CityWeatherFragment extends com.example.weather_forcast.BaseFragmen
         dateTv.setText(resultsBean.getForecast24h().get$1().getTime());
         cityTv.setText(city);
         // 获取今天的天气情况
-        windTv.setText(resultsBean.getObserve().getWindDirection());
-        tempRangeTv.setText(resultsBean.getForecast24h().get$1().getMinDegree()+"~"+resultsBean.getForecast24h().get$1().getMaxDegree());
+        windTv.setText(resultsBean.getForecast24h().get$1().getDayWindDirection()+" "+resultsBean.getForecast24h().get$1().getDayWindPower()+"级");
+        tempRangeTv.setText(resultsBean.getForecast24h().get$1().getMinDegree()+"~"+resultsBean.getForecast24h().get$1().getMaxDegree()+"℃");
         conditionTv.setText(resultsBean.getObserve().getWeather());
         // 获取实时气温
         tempTv.setText(resultsBean.getObserve().getDegree()+"℃");
@@ -74,6 +74,9 @@ public class CityWeatherFragment extends com.example.weather_forcast.BaseFragmen
             case "晴": dayIv.setText("☀");break;
             case "阴": dayIv.setText("☁");break;
             case "多云": dayIv.setText("⛅");break;
+            case "小雨":
+            case "中雨":
+            case "大雨": dayIv.setText("🌧");break;
         }
         // 获取未来三天的天气情况,加载到layout当中
         WeatherBean.DataDTO.Forecast24hDTO futureList = resultsBean.getForecast24h();
@@ -84,9 +87,18 @@ public class CityWeatherFragment extends com.example.weather_forcast.BaseFragmen
         TextView dateTv_2 = itemView_2.findViewById(R.id.item_center_tv_date);
         TextView conTv_2 = itemView_2.findViewById(R.id.item_center_tv_con);
         TextView tempRangeTv_2 = itemView_2.findViewById(R.id.item_center_tv_temp);
-        dateTv_2.setText(futureList.get$2().getTime()+"明天");
+        TextView center_Iv_2 = itemView_2.findViewById(R.id.item_center_iv);
+        dateTv_2.setText(futureList.get$2().getTime()+" "+"明天");
         conTv_2.setText(futureList.get$2().getDayWeather());
         tempRangeTv_2.setText(futureList.get$2().getMinDegree()+"~"+futureList.get$2().getMaxDegree()+"℃");
+        switch (futureList.get$2().getDayWeather()){
+            case "晴": center_Iv_2.setText("☀");break;
+            case "阴": center_Iv_2.setText("☁");break;
+            case "多云": center_Iv_2.setText("⛅");break;
+            case "小雨":
+            case "中雨":
+            case "大雨": center_Iv_2.setText("🌧");break;
+        }
         // 后天
         View itemView_3 = LayoutInflater.from(getActivity()).inflate(R.layout.item_main_center, null);
         itemView_3.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -94,9 +106,18 @@ public class CityWeatherFragment extends com.example.weather_forcast.BaseFragmen
         TextView dateTv_3 = itemView_3.findViewById(R.id.item_center_tv_date);
         TextView conTv_3 = itemView_3.findViewById(R.id.item_center_tv_con);
         TextView tempRangeTv_3 = itemView_3.findViewById(R.id.item_center_tv_temp);
-        dateTv_3.setText(futureList.get$3().getTime()+"后天");
+        TextView center_Iv_3 = itemView_3.findViewById(R.id.item_center_iv);
+        dateTv_3.setText(futureList.get$3().getTime()+" "+"后天");
         conTv_3.setText(futureList.get$3().getDayWeather());
         tempRangeTv_3.setText(futureList.get$3().getMinDegree()+"~"+futureList.get$3().getMaxDegree()+"℃");
+        switch (futureList.get$3().getDayWeather()){
+            case "晴": center_Iv_3.setText("☀");break;
+            case "阴": center_Iv_3.setText("☁");break;
+            case "多云": center_Iv_3.setText("⛅");break;
+            case "小雨":
+            case "中雨":
+            case "大雨": center_Iv_3.setText("🌧");break;
+        }
         // 外天
         View itemView_4 = LayoutInflater.from(getActivity()).inflate(R.layout.item_main_center, null);
         itemView_4.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
@@ -104,9 +125,18 @@ public class CityWeatherFragment extends com.example.weather_forcast.BaseFragmen
         TextView dateTv_4 = itemView_4.findViewById(R.id.item_center_tv_date);
         TextView conTv_4 = itemView_4.findViewById(R.id.item_center_tv_con);
         TextView tempRangeTv_4 = itemView_4.findViewById(R.id.item_center_tv_temp);
-        dateTv_4.setText(futureList.get$4().getTime()+"外天");
+        TextView center_Iv_4 = itemView_3.findViewById(R.id.item_center_iv);
+        dateTv_4.setText(futureList.get$4().getTime()+" "+"外天");
         conTv_4.setText(futureList.get$4().getDayWeather());
         tempRangeTv_4.setText(futureList.get$4().getMinDegree()+"~"+futureList.get$4().getMaxDegree()+"℃");
+        switch (futureList.get$4().getDayWeather()){
+            case "晴": center_Iv_4.setText("☀");break;
+            case "阴": center_Iv_4.setText("☁");break;
+            case "多云": center_Iv_4.setText("⛅");break;
+            case "小雨":
+            case "中雨":
+            case "大雨": center_Iv_4.setText("🌧");break;
+        }
     }
 
     private void initView(View view){
@@ -123,6 +153,7 @@ public class CityWeatherFragment extends com.example.weather_forcast.BaseFragmen
         sportIndexTv = view.findViewById(R.id.frag_index_tv_sport);
         raysIndexTV = view.findViewById(R.id.frag_index_tv_rays);
         dayIv = view.findViewById(R.id.frag_iv_today);
+        umbrellaIv = view.findViewById(R.id.frag_index_tv_umbrella);
         futureLayout = view.findViewById(R.id.frag_center_layout);
         // 设置点击事件监听
         clothIndexTv.setOnClickListener(this);
@@ -130,6 +161,7 @@ public class CityWeatherFragment extends com.example.weather_forcast.BaseFragmen
         coldIndexTv.setOnClickListener(this);
         sportIndexTv.setOnClickListener(this);
         raysIndexTV.setOnClickListener(this);
+        umbrellaIv.setOnClickListener(this);
     }
 
     @Override
@@ -171,6 +203,14 @@ public class CityWeatherFragment extends com.example.weather_forcast.BaseFragmen
                 builder.setMessage(msg);
                 builder.setPositiveButton("确定",null);
                 break;
+            case R.id.frag_index_tv_umbrella:
+                builder.setTitle("雨伞指数");
+                WeatherBean.DataDTO.IndexDTO.UmbrellaDTO umbrella = indexList.getUmbrella();
+                msg = umbrella.getInfo()+"\n"+umbrella.getDetail();
+                builder.setMessage(msg);
+                builder.setPositiveButton("确定",null);
+                break;
+
         }
         builder.create().show();
     }
