@@ -57,19 +57,20 @@
             android:background="#808A87"
         />
         <TextView
+            android:id="@+id/item_city_humidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:layout_toRightOf="@id/item_city_line2"
             android:layout_below="@id/item_city_line1"
-            android:text="西南风2级"/>
+            android:text="湿度:"/>
         <TextView
-            android:id="@+id/item_city_temprange"
+            android:id="@+id/item_city_update"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:layout_alignParentRight="true"
-            android:text="1~5℃"
+            android:text="更新时间："
             android:layout_below="@id/item_city_line1"
             android:layout_marginRight="20dp"/>
     </RelativeLayout>

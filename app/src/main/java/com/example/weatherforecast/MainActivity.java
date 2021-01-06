@@ -6,12 +6,15 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.weatherforecast.cityManager.CityManagerActivity;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView addCityIv,moreIv;
@@ -41,9 +44,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imgList = new ArrayList<>();
         if (cityList.size()==0){
             cityList.add("北京");
-            cityList.add("上海");
-            cityList.add("重庆");
         }
+//        Intent intent = getIntent();
+//        String city = intent.getStringExtra("city");
+//        if(!cityList.contains(city)&&!TextUtils.isEmpty(city)){
+//            cityList.add(city);
+//        }
         initPager();
         adapter = new CityFragmentPagerAdapter(getSupportFragmentManager(), fragmentList);
         mainVp.setAdapter(adapter);
@@ -103,10 +109,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent();
         switch (v.getId()){
             case R.id.main_iv_add:
-                intent.setClass(this,CityManagerActivity.class);
+                intent.setClass(this, CityManagerActivity.class);
                 break;
             case R.id.main_iv_more:
-
                 break;
         }
         startActivity(intent);

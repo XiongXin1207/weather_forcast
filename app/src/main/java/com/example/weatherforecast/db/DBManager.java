@@ -10,38 +10,66 @@ import java.util.List;
 
 public class DBManager {
     public static SQLiteDatabase database;
-    public static void initDB(Context context){
+
+    public static void initDB(Context context) {
         DBHelper dbHelper = new DBHelper(context);
         database = dbHelper.getWritableDatabase();
     }
-    public static List<String>queryAllCityName(){
-        Cursor cursor = database.query("info",null,null,null,null,null,null);
-        List<String>cityList = new ArrayList<>();
-        while(cursor.moveToNext()){
+
+    // 查询数据库中全部城市信息
+    public static List<String> queryAllCityName() {
+        Cursor cursor = database.query("info", null, null, null, null, null, null);
+        List<String> cityList = new ArrayList<>();
+        while (cursor.moveToNext()) {
             String city = cursor.getString(cursor.getColumnIndex("city"));
             cityList.add(city);
         }
         return cityList;
     }
-//    根据城市名称替换信息内容
-    public static int updateInfoByCity(String city, String content){
+
+    //    根据城市名称替换信息内容
+    public static int updateInfoByCity(String city, String content) {
         ContentValues values = new ContentValues();
-        values.put("content",content);
-        return database.update("info", values, city="?",new String[]{city});
+        values.put("content", content);
+        return database.update("info", values, city = "?", new String[]{city});
     }
-    public static long addCityInfo(String city, String content){
+
+    public static long addCityInfo(String city, String content) {
         ContentValues values = new ContentValues();
-        values.put("city",city);
-        values.put("content",content);
-        return database.insert("info",null,values);
+        values.put("city", city);
+        values.put("content", content);
+        return database.insert("info", null, values);
     }
-    public static String queryInfoByCity(String city){
+
+    public static String queryInfoByCity(String city) {
         Cursor cursor = database.query("info", null, "city=?", new String[]{city}, null, null, null);
-        if (cursor.getCount()>0){
+        if (cursor.getCount() > 0) {
             cursor.moveToFirst();
             String content = cursor.getString(cursor.getColumnIndex("content"));
             return content;
         }
         return null;
     }
+
+    /*存储城市天气最多五个，超过五个就不能存储*/
+    public static int getCityCount() {
+        Cursor cursor = database.query("info", null, null, null, null, null, null);
+        return cursor.getCount();
+    }
+
+    /*查询数据库中的全部信息
+     */
+    public static List<DatabaseBean> queryAllInfo() {
+        Cursor cursor = database.query("info", null, null, null, null, null, null);
+        List<DatabaseBean> list = new ArrayList<>();
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndex("_id"));
+            String city = cursor.getString(cursor.getColumnIndex("city"));
+            String content = cursor.getString(cursor.getColumnIndex("content"));
+            DatabaseBean bean = new DatabaseBean(id, city, content);
+            list.add(bean);
+        }
+        return list;
+    }
 }
+

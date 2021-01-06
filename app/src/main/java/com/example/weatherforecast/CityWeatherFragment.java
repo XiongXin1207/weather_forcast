@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -15,13 +14,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.weatherforecast.Base.BaseFragment;
 import com.example.weatherforecast.bean.WeatherBean;
 import com.example.weatherforecast.db.DBManager;
 import com.google.gson.Gson;
-import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
-import org.xutils.DbManager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -32,7 +28,7 @@ import java.text.SimpleDateFormat;
  * create an instance of this fragment.
  */
 public class CityWeatherFragment extends BaseFragment implements View.OnClickListener {
-    TextView tempTv,cityTv,conditionTv,windTv,temperatureRangeTv,dateTv,clothIndexTv,carIndexTV,coldTv,sportTv,raysTv;
+    TextView tempTv,cityTv,conditionTv,windTv,temperatureRangeTv,dateTv,clothIndexTv,carIndexTV,coldTv,sportTv,raysTv,umbrellaTv;
     ImageView dayIv;
     LinearLayout futureLayout;
     String url1 = "https://wis.qq.com/weather/common?source=pc&weather_type=observe|index|rise|alarm|air|tips|forecast_24h&province=";
@@ -69,17 +65,21 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
     public void onSuccess(String result) {
         //解析并展示数据
             parseShowData(result);
+            System.out.println("success");
         int i= DBManager.updateInfoByCity(city,result);
         if(i <= 0) {
             //更新数据库失败，需要增加城市记录
             DBManager.addCityInfo(city,result);
         }
+
     }
 
     private void parseShowData(String result) {
         //使用Gson解析数据
+
         WeatherBean weatherBean = new Gson().fromJson(result, WeatherBean.class);
         WeatherBean.DataDTO data = weatherBean.getData();//获取data对象
+        index = weatherBean.getData().getIndex();
         today = data.getForecast_24h().get_$1();
         dateTv.setText("日期：" + data.getForecast_24h().get_$1().getTime());
         cityTv.setText(city);
@@ -138,9 +138,9 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
         }
     }
 
-    private String changeTime(String update_time) throws ParseException {
+    public static String changeTime(String update_time) throws ParseException {
         SimpleDateFormat sf1 = new SimpleDateFormat("yyyyMMddHHmm");
-        SimpleDateFormat sf2 =new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat sf2 =new SimpleDateFormat("HH:mm");
         String sfstr = "";
         sfstr = sf2.format(sf1.parse(update_time));
         return sfstr;
@@ -159,12 +159,14 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
         coldTv = view.findViewById(R.id.frag_index_tv_cold);
         sportTv = view.findViewById(R.id.frag_index_tv_sport);
         raysTv = view.findViewById(R.id.frag_index_tv_ray);
+        umbrellaTv = view.findViewById(R.id.frag_index_tv_umbrella);
         futureLayout = view.findViewById(R.id.frag_center_layout);
         clothIndexTv.setOnClickListener(this);
         carIndexTV.setOnClickListener(this);
         coldTv.setOnClickListener(this);
         sportTv.setOnClickListener(this);
         raysTv.setOnClickListener(this);
+        umbrellaTv.setOnClickListener(this);
 
     }
 
@@ -207,6 +209,14 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
                 builder.setMessage(msg);
                 builder.setPositiveButton("确定",null);
                 break;
+            case R.id.frag_index_tv_umbrella:
+                builder.setTitle("雨伞指数");
+                WeatherBean.DataDTO.IndexDTO.UmbrellaDTO umbrella = index.getUmbrella();
+                msg = umbrella.getInfo() + "\n" + umbrella.getDetail();
+                builder.setMessage(msg);
+                builder.setPositiveButton("确定",null);
+                break;
         }
+        builder.create().show();
     }
 }

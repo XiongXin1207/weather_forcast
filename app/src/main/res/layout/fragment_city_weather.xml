@@ -155,7 +155,7 @@
                     style="@style/indextext"
                     android:id="@+id/frag_index_tv_umbrella"
                     android:text="雨伞指数"
-                    android:drawableBottom="@mipmap/icon_umbrella"></TextView>
+                    android:drawableBottom="@mipmap/icon_umbrella"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
