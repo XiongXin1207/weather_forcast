@@ -6,11 +6,14 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewParent;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.example.weather_forcast.city_manager.CityManagerActivity;
 import com.example.weather_forcast.db.DBManager;
 
 import java.util.ArrayList;
@@ -45,7 +48,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(cityList.size()==0){
             cityList.add("北京");
+//            cityList.add("上海");
+//            cityList.add("天津");
         }
+        try {
+            Intent intent = getIntent();
+            String city = intent.getStringExtra("city");
+            if(!cityList.contains(city)&&!TextUtils.isEmpty(city)){
+                cityList.add(city);
+            }
+        }catch (Exception e){
+            Log.i("animee","程序出现问题了");
+        }
+        // 搜索界面可能点击跳转到此界面会传值，会传值，所以此处获取一下
         // 初始化ViewPager页面的方法
         initPager();
         adapter = new CityFragmentPagerAdapter(getSupportFragmentManager(), fragmentList);
@@ -110,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Intent intent = new Intent();
         switch (v.getId()){
             case R.id.main_iv_add:
-                intent.setClass(this,CityManagerActivity.class);
+                intent.setClass(this, CityManagerActivity.class);
                 break;
             case R.id.main_iv_more:
 

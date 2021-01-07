@@ -9,12 +9,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.weather_forcast.base.BaseFragment;
 import com.example.weather_forcast.bean.WeatherBean;
 import com.example.weather_forcast.db.DBManager;
 import com.google.gson.Gson;
 
 
-public class CityWeatherFragment extends com.example.weather_forcast.BaseFragment implements View.OnClickListener{
+public class CityWeatherFragment extends BaseFragment implements View.OnClickListener{
     TextView tempTv, cityTv, conditionTv, windTv, tempRangeTv, dateTv,
             clothIndexTv, carIndexTV, coldIndexTv, sportIndexTv, raysIndexTV, dayIv, umbrellaIv;
     LinearLayout futureLayout;
