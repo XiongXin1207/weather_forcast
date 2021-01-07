@@ -71,5 +71,10 @@ public class DBManager {
         }
         return list;
     }
+    /*根据城市名称，删除这个城市在数据库中的数据
+     */
+    public static int deleteInfoByCity(String city){
+        return database.delete("info","city=?",new String[]{city});
+    }
 }
 

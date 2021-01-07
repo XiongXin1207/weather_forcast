@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.weatherforecast.cityManager.CityManagerActivity;
+import com.example.weatherforecast.db.DBManager;
+
+import org.xutils.DbManager;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView addCityIv,moreIv;
@@ -40,20 +43,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         moreIv.setOnClickListener(this);
 
         fragmentList = new ArrayList<>();
-        cityList = new ArrayList<>();
+//        cityList = new ArrayList<>();
+        cityList = DBManager.queryAllCityName();
         imgList = new ArrayList<>();
         if (cityList.size()==0){
             cityList.add("北京");
         }
-//        Intent intent = getIntent();
-//        String city = intent.getStringExtra("city");
-//        if(!cityList.contains(city)&&!TextUtils.isEmpty(city)){
-//            cityList.add(city);
-//        }
+        Intent intent = getIntent();
+        String city = intent.getStringExtra("city");
+        if(!cityList.contains(city)&&!TextUtils.isEmpty(city)){
+            cityList.add(city);
+        }
         initPager();
         adapter = new CityFragmentPagerAdapter(getSupportFragmentManager(), fragmentList);
         mainVp.setAdapter(adapter);
+        //  创建小圆点指示器
         initPoint();
+
         mainVp.setCurrentItem(fragmentList.size()-1);
         setPagerListener();
     }
@@ -67,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             @Override
             public void onPageSelected(int position) {
-                for(int i = 0;i < imgList.size();i++){
+                for(int i = 0; i < imgList.size(); i++){
                     imgList.get(i).setImageResource(R.mipmap.a1);
                 }
                 imgList.get(position).setImageResource(R.mipmap.a2);
@@ -115,5 +121,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
         startActivity(intent);
+    }
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+//        获取数据库当中还剩下的城市集合
+        List<String> list = DBManager.queryAllCityName();
+        if (list.size()==0) {
+            list.add("北京");
+        }
+        cityList.clear();    //重写加载之前，清空原本数据源
+        cityList.addAll(list);
+//        剩余城市也要创建对应的fragment页面
+        fragmentList.clear();
+        initPager();
+        adapter.notifyDataSetChanged();
+//        页面数量发生改变，指示器的数量也会发生变化，重写设置添加指示器
+        imgList.clear();
+        pointLayout.removeAllViews();   //将布局当中所有元素全部移除
+        initPoint();
+        mainVp.setCurrentItem(fragmentList.size()-1);
     }
 }

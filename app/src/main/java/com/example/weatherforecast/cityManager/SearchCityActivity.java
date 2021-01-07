@@ -57,14 +57,12 @@ public class SearchCityActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-
         switch (v.getId()){
             case R.id.search_iv_submit:
                 city = searchEt.getText().toString();
                 if(!TextUtils.isEmpty(city)){
                     //判断是否能找到这个城市
                     province = getProvince(city);
-                    System.out.println(province);
                     String url = url1 + province + url2 + city;
                     loadData(url);
                 }
