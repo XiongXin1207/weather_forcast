@@ -12,12 +12,14 @@ import android.widget.Toast;
 import com.example.weather_forcast.R;
 import com.example.weather_forcast.db.DBManager;
 import com.example.weather_forcast.db.DatabaseBean;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CityManagerActivity extends AppCompatActivity implements View.OnClickListener {
     ImageView addIv, backIv, deleteIv;
+    FloatingActionButton addButton;
     ListView cityIv;
     List<DatabaseBean> mDatas; //显示列表数据源
     private CityManagerAdapter adapter;
@@ -26,13 +28,15 @@ public class CityManagerActivity extends AppCompatActivity implements View.OnCli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_city_manager);
-        addIv = findViewById(R.id.city_iv_add);
+//        addIv = findViewById(R.id.city_iv_add);
+        addButton = findViewById(R.id.city_fb_add);
         backIv = findViewById(R.id.city_iv_back);
         deleteIv = findViewById(R.id.city_iv_delete);
         cityIv = findViewById(R.id.city_lv);
         mDatas = new ArrayList<>();
         // 添加点击监听事件
-        addIv.setOnClickListener(this);
+//        addIv.setOnClickListener(this);
+        addButton.setOnClickListener(this);
         deleteIv.setOnClickListener(this);
         backIv.setOnClickListener(this);
         // 设置适配器
@@ -52,7 +56,7 @@ public class CityManagerActivity extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.city_iv_add:
+            case R.id.city_fb_add:
                 int cityCount = DBManager.getCityCount();
                 if(cityCount<5){
                     Intent intent = new Intent(this, SearchCityActivity.class);
