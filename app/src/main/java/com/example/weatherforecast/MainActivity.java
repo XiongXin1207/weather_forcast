@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //        cityList = new ArrayList<>();
         cityList = DBManager.queryAllCityName();
         imgList = new ArrayList<>();
+
         if (cityList.size()==0){
             cityList.add("北京");
         }

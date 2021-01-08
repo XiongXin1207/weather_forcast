@@ -31,14 +31,14 @@ public class DBManager {
     public static int updateInfoByCity(String city, String content) {
         ContentValues values = new ContentValues();
         values.put("content", content);
-        return database.update("info", values, city = "?", new String[]{city});
+        return database.update("info", values, city="?", new String[]{city});
     }
 
-    public static long addCityInfo(String city, String content) {
+    public static long addCityInfo(String city,String content){
         ContentValues values = new ContentValues();
-        values.put("city", city);
-        values.put("content", content);
-        return database.insert("info", null, values);
+        values.put("city",city);
+        values.put("content",content);
+        return database.insert("info",null,values);
     }
 
     public static String queryInfoByCity(String city) {
@@ -75,6 +75,10 @@ public class DBManager {
      */
     public static int deleteInfoByCity(String city){
         return database.delete("info","city=?",new String[]{city});
+    }
+    public static void deleteAllInfo(){
+        String sql = "delete from info";
+        database.execSQL(sql);
     }
 }
 

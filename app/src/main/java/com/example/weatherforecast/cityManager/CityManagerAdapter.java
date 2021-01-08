@@ -46,6 +46,7 @@ public class CityManagerAdapter extends BaseAdapter {
         if (convertView == null){
             convertView = LayoutInflater.from(context).inflate(R.layout.item_city_manager,null);
             holder = new ViewHolder(convertView);
+            convertView.setTag(holder);
         }
         else{
             holder = (ViewHolder) convertView.getTag();

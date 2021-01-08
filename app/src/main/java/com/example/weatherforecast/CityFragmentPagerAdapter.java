@@ -16,6 +16,14 @@ public class CityFragmentPagerAdapter extends FragmentStatePagerAdapter {
         this.fragmentlist = fragmentlist;
     }
 
+    int childCount = 0;
+
+    @Override
+    public void notifyDataSetChanged() {
+        this.childCount = getCount();
+
+        super.notifyDataSetChanged();
+    }
 
     @NonNull
     @Override
@@ -23,6 +31,14 @@ public class CityFragmentPagerAdapter extends FragmentStatePagerAdapter {
         return fragmentlist.get(position);
     }
 
+    @Override
+    public int getItemPosition(@NonNull Object object) {
+        if(childCount>0){
+            childCount--;
+            return POSITION_NONE;
+        }
+        return super.getItemPosition(object);
+    }
 
     @Override
     public int getCount() {

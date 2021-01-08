@@ -29,20 +29,16 @@ public class DeleteCityActivity extends AppCompatActivity implements View.OnClic
         rightIv = findViewById(R.id.delete_iv_right);
         deleteLv = findViewById(R.id.delete_lv);
         mDatas = DBManager.queryAllCityName();
+        deleteCities = new ArrayList<>();
         //设置监听事件
         errorIv.setOnClickListener(this);
         rightIv.setOnClickListener(this);
         adapter = new DeleteCityAdapter(this,mDatas,deleteCities);
         deleteLv.setAdapter(adapter);
+
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-//        List<String> cityList = DBManager.queryAllCityName();
-//        mDatas.addAll(cityList);
-//        adapter.notifyDataSetChanged();
-    }
+
 
     @Override
     public void onClick(View v) {
@@ -61,6 +57,7 @@ public class DeleteCityActivity extends AppCompatActivity implements View.OnClic
             case R.id.delete_iv_right:
                 for (int i = 0;i<deleteCities.size();i++){
                     String city = deleteCities.get(i);
+                    System.out.println(city);
                     // 调用删除城市的函数
                     DBManager.deleteInfoByCity(city);
                 }

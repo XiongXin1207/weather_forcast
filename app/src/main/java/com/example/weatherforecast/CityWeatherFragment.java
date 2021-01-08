@@ -65,18 +65,16 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
     public void onSuccess(String result) {
         //解析并展示数据
             parseShowData(result);
-            System.out.println("success");
-        int i= DBManager.updateInfoByCity(city,result);
+//            System.out.println("success");
+        int i = DBManager.updateInfoByCity(city,result);
         if(i <= 0) {
             //更新数据库失败，需要增加城市记录
+
             DBManager.addCityInfo(city,result);
         }
-
     }
-
     private void parseShowData(String result) {
         //使用Gson解析数据
-
         WeatherBean weatherBean = new Gson().fromJson(result, WeatherBean.class);
         WeatherBean.DataDTO data = weatherBean.getData();//获取data对象
         index = weatherBean.getData().getIndex();
