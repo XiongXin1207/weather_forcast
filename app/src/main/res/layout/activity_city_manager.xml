@@ -49,14 +49,24 @@
         android:layout_below="@+id/city_line"
         android:divider="@null">
     </ListView>
-    <ImageView
-        android:id="@+id/city_iv_add"
+<!--    <ImageView-->
+<!--        android:id="@+id/city_iv_add"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:src="@mipmap/icon_add_1"-->
+<!--        android:layout_alignParentRight="true"-->
+<!--        android:layout_alignParentBottom="true"-->
+<!--        android:layout_margin="30dp"-->
+<!--        android:padding="3dp">-->
+<!--    </ImageView>-->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/city_fb_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@mipmap/icon_add_1"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="30dp"
-        android:padding="3dp">
-    </ImageView>
+        android:padding="3dp"
+        android:src="@mipmap/add">
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
 </RelativeLayout>
