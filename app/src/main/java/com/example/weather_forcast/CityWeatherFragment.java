@@ -1,12 +1,14 @@
 package com.example.weather_forcast;
 
 import android.app.AlertDialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.weather_forcast.base.BaseFragment;
@@ -14,22 +16,45 @@ import com.example.weather_forcast.bean.WeatherBean;
 import com.example.weather_forcast.db.DBManager;
 import com.google.gson.Gson;
 
+import static android.content.Context.MODE_PRIVATE;
+
 
 public class CityWeatherFragment extends BaseFragment implements View.OnClickListener{
     TextView tempTv, cityTv, conditionTv, windTv, tempRangeTv, dateTv,
             clothIndexTv, carIndexTV, coldIndexTv, sportIndexTv, raysIndexTV, dayIv, umbrellaIv;
     LinearLayout futureLayout;
+    ScrollView outLayout;
     String url1 = "https://wis.qq.com/weather/common?source=pc&weather_type=observe|index|rise|alarm|air|tips|forecast_24h&province=";
-    String url2 = "&city=";;
+    String url2 = "&city=";
     String province;
     String city;
     private WeatherBean.DataDTO.IndexDTO indexList;
+    private SharedPreferences pref;
+    private int bg;
+
+    // 换壁纸的函数
+    public void exchangeBg(){
+        pref = getActivity().getSharedPreferences("bg_pref", MODE_PRIVATE);
+        bg = pref.getInt("bg", 2);
+        switch (bg){
+            case 0:
+                outLayout.setBackgroundResource(R.mipmap.bg);
+                break;
+            case 1:
+                outLayout.setBackgroundResource(R.mipmap.bg2);
+                break;
+            case 2:
+                outLayout.setBackgroundResource(R.mipmap.bg3);
+                break;
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_city_weather, container, false);
         initView(view);
+        exchangeBg();
         // 可以通过activity传值获取当前fragment加载的是哪个地方的天气情况
         Bundle bundle = getArguments();
         String province_city = bundle.getString("city");
@@ -169,6 +194,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
         dayIv = view.findViewById(R.id.frag_iv_today);
         umbrellaIv = view.findViewById(R.id.frag_index_tv_umbrella);
         futureLayout = view.findViewById(R.id.frag_center_layout);
+        outLayout = view.findViewById(R.id.out_layout);
         // 设置点击事件监听
         clothIndexTv.setOnClickListener(this);
         carIndexTV.setOnClickListener(this);
