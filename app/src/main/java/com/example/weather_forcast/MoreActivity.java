@@ -112,7 +112,7 @@ public class MoreActivity extends AppCompatActivity implements View.OnClickListe
                 clearCache();
                 break;
             case R.id.more_tv_share:
-                shareSoftwareMsg("歪比歪比，歪比巴伯");
+                shareSoftwareMsg("天气app");
                 break;
             case R.id.more_iv_back:
                 finish();

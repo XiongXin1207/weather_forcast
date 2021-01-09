@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         pointLayout = findViewById(R.id.main_layout_point);
         mainVp = findViewById(R.id.main_vp);
         outLayout = findViewById(R.id.main_out_layout);
-        exchangeBg();
         // 添加点击事件
         addCityIv.setOnClickListener(this);
         moreIv.setOnClickListener(this);
@@ -61,15 +60,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //            cityList.add("天津");
         }
         // 搜索界面可能点击跳转到此界面会传值，会传值，所以此处获取一下
-        try {
-            Intent intent = getIntent();
-            String city = intent.getStringExtra("city");
-            if(!cityList.contains(city)&&!TextUtils.isEmpty(city)){
-                cityList.add(city);
-            }
-        }catch (Exception e){
-            Log.i("animee","程序出现问题了");
-        }
+         Intent intent = getIntent();
+         String city = intent.getStringExtra("city");
+         if(!cityList.contains(city)&&!TextUtils.isEmpty(city)){
+             cityList.add(city);
+         }
 
         // 初始化ViewPager页面的方法
         initPager();
@@ -126,14 +121,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //创建小圆点 ViewPager页面指示器的函数
         for(int i = 0; i <fragmentList.size(); i++){
             ImageView pIv = new ImageView(this);
-            pIv.setImageResource(R.mipmap.a1);
+            pIv.setImageResource(R.mipmap.a2);
             pIv.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
             LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) pIv.getLayoutParams();
             lp.setMargins(0, 0, 20, 0);
             imgList.add(pIv);
             pointLayout.addView(pIv);
         }
-        imgList.get(imgList.size()-1).setImageResource(R.mipmap.a2);
+        imgList.get(imgList.size()-1).setImageResource(R.mipmap.a1);
     }
 
     private void initPager() {

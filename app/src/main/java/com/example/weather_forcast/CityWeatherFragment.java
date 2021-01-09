@@ -22,7 +22,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class CityWeatherFragment extends BaseFragment implements View.OnClickListener{
     TextView tempTv, cityTv, conditionTv, windTv, tempRangeTv, dateTv,
             clothIndexTv, carIndexTV, coldIndexTv, sportIndexTv, raysIndexTV, dayIv, umbrellaIv;
-    LinearLayout futureLayout;
+    LinearLayout futureLayout, indexLayout;
     ScrollView outLayout;
     String url1 = "https://wis.qq.com/weather/common?source=pc&weather_type=observe|index|rise|alarm|air|tips|forecast_24h&province=";
     String url2 = "&city=";
@@ -108,14 +108,30 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
         conditionTv.setText(resultsBean.getObserve().getWeather());
         // 获取实时气温
         tempTv.setText(resultsBean.getObserve().getDegree()+"℃");
-        // 设置显示的天气情况
+        // 设置显示的天气情况及背景
         switch (resultsBean.getObserve().getWeather()){
-            case "晴": dayIv.setText("☀");break;
-            case "阴": dayIv.setText("☁");break;
-            case "多云": dayIv.setText("⛅");break;
+            case "晴":  dayIv.setText("☀");
+                        outLayout.setBackgroundResource(R.mipmap.sunny);
+                        futureLayout.setBackgroundColor(0x5087CEFA);
+                        indexLayout.setBackgroundColor(0x5087CEFA);
+                        break;
+            case "阴":  dayIv.setText("☁");
+                        outLayout.setBackgroundResource(R.mipmap.yintian);
+                        futureLayout.setBackgroundColor(0x50C0C0C0);
+                        indexLayout.setBackgroundColor(0x50C0C0C0);
+                        break;
+            case "多云":dayIv.setText("⛅");
+                        outLayout.setBackgroundResource(R.mipmap.cloudy);
+                        futureLayout.setBackgroundColor(0x50E6E6FA);
+                        indexLayout.setBackgroundColor(0x50E6E6FA);
+                        break;
             case "小雨":
             case "中雨":
-            case "大雨": dayIv.setText("🌧");break;
+            case "大雨":dayIv.setText("🌧");
+                        outLayout.setBackgroundResource(R.mipmap.rainy);
+                        futureLayout.setBackgroundColor(0x506495ED);
+                        indexLayout.setBackgroundColor(0x506495ED);
+                        break;
         }
         // 获取未来三天的天气情况,加载到layout当中
         WeatherBean.DataDTO.Forecast24hDTO futureList = resultsBean.getForecast24h();
@@ -129,7 +145,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
         TextView center_Iv_2 = itemView_2.findViewById(R.id.item_center_iv);
         dateTv_2.setText(futureList.get$2().getTime()+" "+"明天");
         conTv_2.setText(futureList.get$2().getDayWeather());
-        tempRangeTv_2.setText(futureList.get$2().getMinDegree()+"~"+futureList.get$2().getMaxDegree()+"℃");
+        tempRangeTv_2.setText(futureList.get$2().getMinDegree()+" ~ "+futureList.get$2().getMaxDegree()+"℃");
         switch (futureList.get$2().getDayWeather()){
             case "晴": center_Iv_2.setText("☀");break;
             case "阴": center_Iv_2.setText("☁");break;
@@ -148,7 +164,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
         TextView center_Iv_3 = itemView_3.findViewById(R.id.item_center_iv);
         dateTv_3.setText(futureList.get$3().getTime()+" "+"后天");
         conTv_3.setText(futureList.get$3().getDayWeather());
-        tempRangeTv_3.setText(futureList.get$3().getMinDegree()+"~"+futureList.get$3().getMaxDegree()+"℃");
+        tempRangeTv_3.setText(futureList.get$3().getMinDegree()+" ~ "+futureList.get$3().getMaxDegree()+"℃");
         switch (futureList.get$3().getDayWeather()){
             case "晴": center_Iv_3.setText("☀");break;
             case "阴": center_Iv_3.setText("☁");break;
@@ -164,10 +180,10 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
         TextView dateTv_4 = itemView_4.findViewById(R.id.item_center_tv_date);
         TextView conTv_4 = itemView_4.findViewById(R.id.item_center_tv_con);
         TextView tempRangeTv_4 = itemView_4.findViewById(R.id.item_center_tv_temp);
-        TextView center_Iv_4 = itemView_3.findViewById(R.id.item_center_iv);
+        TextView center_Iv_4 = itemView_4.findViewById(R.id.item_center_iv);
         dateTv_4.setText(futureList.get$4().getTime()+" "+"外天");
         conTv_4.setText(futureList.get$4().getDayWeather());
-        tempRangeTv_4.setText(futureList.get$4().getMinDegree()+"~"+futureList.get$4().getMaxDegree()+"℃");
+        tempRangeTv_4.setText(futureList.get$4().getMinDegree()+" ~ "+futureList.get$4().getMaxDegree()+"℃");
         switch (futureList.get$4().getDayWeather()){
             case "晴": center_Iv_4.setText("☀");break;
             case "阴": center_Iv_4.setText("☁");break;
@@ -195,6 +211,7 @@ public class CityWeatherFragment extends BaseFragment implements View.OnClickLis
         umbrellaIv = view.findViewById(R.id.frag_index_tv_umbrella);
         futureLayout = view.findViewById(R.id.frag_center_layout);
         outLayout = view.findViewById(R.id.out_layout);
+        indexLayout = view.findViewById(R.id.frag_index_layout);
         // 设置点击事件监听
         clothIndexTv.setOnClickListener(this);
         carIndexTV.setOnClickListener(this);

@@ -76,7 +76,7 @@ public class SearchCityActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onSuccess(String result) {
         WeatherBean weatherBean = new Gson().fromJson(result, WeatherBean.class);
-        if(weatherBean.getData().getAir()!=null){
+        if(weatherBean.getData().getIndex().getClothes()!=null){
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
             city = province + " " + city;
@@ -101,9 +101,9 @@ public class SearchCityActivity extends BaseActivity implements View.OnClickList
                 {
                     province = Cities[i].split(" ")[0];
                 }
-                break;
+                return province;
             }
         }
-        return province;
+        return null;
     }
 }

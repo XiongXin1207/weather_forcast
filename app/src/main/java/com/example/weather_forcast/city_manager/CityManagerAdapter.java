@@ -55,7 +55,7 @@ public class CityManagerAdapter extends BaseAdapter {
         holder.cityTv.setText(bean.getCity());
         WeatherBean weatherBean = new Gson().fromJson(bean.getContent(), WeatherBean.class);
         // 获取今日天气情况
-        holder.conTv.setText("天气:"+weatherBean.getData().getObserve().getWeather());
+        holder.conTv.setText(weatherBean.getData().getObserve().getWeather());
         holder.currentTempTv.setText(weatherBean.getData().getObserve().getDegree()+"℃");
         holder.windTv.setText(weatherBean.getData().getForecast24h().get$1().getDayWindDirection()+weatherBean.getData().getForecast24h().get$1().getDayWindPower()+"级");
         holder.tempRangeTv.setText(weatherBean.getData().getForecast24h().get$1().getMinDegree()+"~"+weatherBean.getData().getForecast24h().get$1().getMaxDegree()+"℃");
