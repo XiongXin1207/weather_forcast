@@ -4,7 +4,7 @@
     android:id="@+id/out_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bg">
+    android:background="@mipmap/sunny">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -105,62 +105,38 @@
                     android:id="@+id/frag_index_tv_dress"
                     style="@style/indextext"
                     android:text="穿衣指数"
-                    android:drawableBottom="@mipmap/icon_cloth">
+                    android:drawableBottom="@mipmap/clothes">
                 </TextView>
-                <ImageView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="#2E8B57">
-                </ImageView>
                 <TextView
                     android:id="@+id/frag_index_tv_washcar"
                     style="@style/indextext"
                     android:text="洗车指数"
-                    android:drawableBottom="@mipmap/icon_car">
+                    android:drawableBottom="@mipmap/car">
                 </TextView>
-                <ImageView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="#2E8B57">
-                </ImageView>
                 <TextView
                     android:id="@+id/frag_index_tv_cold"
                     style="@style/indextext"
                     android:text="感冒指数"
-                    android:drawableBottom="@mipmap/icon_ganmao">
+                    android:drawableBottom="@mipmap/capsule_icon">
                 </TextView>
             </LinearLayout>
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#2E8B57">
-            </ImageView>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp">
                 <TextView
                     android:id="@+id/frag_index_tv_sport"
                     style="@style/indextext"
                     android:text="运动指数"
-                    android:drawableBottom="@mipmap/icon_sport">
+                    android:drawableBottom="@mipmap/sport">
                 </TextView>
-                <ImageView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="#2E8B57">
-                </ImageView>
                 <TextView
                     android:id="@+id/frag_index_tv_rays"
                     style="@style/indextext"
                     android:text="紫外线指数"
-                    android:drawableBottom="@mipmap/icon_light">
+                    android:drawableBottom="@mipmap/ultraviolet">
                 </TextView>
-                <ImageView
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="#2E8B57">
-                </ImageView>
                 <TextView
                     android:id="@+id/frag_index_tv_umbrella"
                     style="@style/indextext"
@@ -168,9 +144,6 @@
                     android:drawableBottom="@mipmap/icon_umbrella">
                 </TextView>
             </LinearLayout>
-
         </LinearLayout>
-
     </LinearLayout>
-
 </ScrollView>

@@ -13,7 +13,7 @@
         <ImageView
             android:id="@+id/city_iv_back"
             android:layout_marginLeft="10dp"
-            android:src="@mipmap/icon_back"
+            android:src="@mipmap/back"
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
         </ImageView>
@@ -21,7 +21,7 @@
             android:id="@+id/city_iv_delete"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@mipmap/icon_write"
+            android:src="@mipmap/edit"
             android:layout_alignParentRight="true"
             android:layout_marginRight="10dp">
         </ImageView>
@@ -49,16 +49,6 @@
         android:layout_below="@+id/city_line"
         android:divider="@null">
     </ListView>
-<!--    <ImageView-->
-<!--        android:id="@+id/city_iv_add"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:src="@mipmap/icon_add_1"-->
-<!--        android:layout_alignParentRight="true"-->
-<!--        android:layout_alignParentBottom="true"-->
-<!--        android:layout_margin="30dp"-->
-<!--        android:padding="3dp">-->
-<!--    </ImageView>-->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/city_fb_add"
         android:layout_width="wrap_content"
@@ -67,6 +57,8 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="30dp"
         android:padding="3dp"
+        android:backgroundTint="@color/white"
+        app:backgroundTint="@color/white"
         android:src="@mipmap/add">
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
 </RelativeLayout>

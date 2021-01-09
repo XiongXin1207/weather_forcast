@@ -40,7 +40,7 @@
         android:layout_height="wrap_content"
         android:text="改变壁纸"
         android:textSize="18sp"
-        android:drawableLeft="@mipmap/more_bg"
+        android:drawableLeft="@mipmap/wallpaper"
         android:layout_below="@+id/more_line1"
         android:drawablePadding="20dp"
         android:padding="10dp">
@@ -67,7 +67,6 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:text="青瓦白墙"
             android:textStyle="bold">
         </RadioButton>
         <RadioButton
@@ -78,7 +77,6 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:text="粉妆玉砌"
             android:textStyle="bold">
         </RadioButton>
         <RadioButton
@@ -89,7 +87,6 @@
             android:layout_weight="1"
             android:button="@null"
             android:gravity="center"
-            android:text="蓝色梦想"
             android:textStyle="bold">
         </RadioButton>
     </RadioGroup>
@@ -99,7 +96,7 @@
         android:layout_height="wrap_content"
         android:text="当前版本"
         android:textSize="18sp"
-        android:drawableLeft="@mipmap/more_version"
+        android:drawableLeft="@mipmap/version"
         android:layout_below="@+id/more_rg"
         android:drawablePadding="20dp"
         android:padding="10dp">
@@ -117,7 +114,7 @@
         android:layout_height="wrap_content"
         android:text="清除缓存"
         android:textSize="18sp"
-        android:drawableLeft="@mipmap/more_cache"
+        android:drawableLeft="@mipmap/recycle"
         android:layout_below="@+id/more_line3"
         android:drawablePadding="20dp"
         android:padding="10dp">
@@ -135,7 +132,7 @@
         android:layout_height="wrap_content"
         android:text="分享软件"
         android:textSize="18sp"
-        android:drawableLeft="@mipmap/more_share"
+        android:drawableLeft="@mipmap/share"
         android:layout_below="@+id/more_line4"
         android:drawablePadding="20dp"
         android:padding="10dp">

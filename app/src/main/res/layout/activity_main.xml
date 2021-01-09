@@ -5,14 +5,14 @@
     android:id="@+id/main_out_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bg"
     tools:context=".MainActivity">
 
     <RelativeLayout
         android:id="@+id/main_bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="#DCDCDC">
         <ImageView
             android:id="@+id/main_iv_add"
             android:layout_width="wrap_content"
