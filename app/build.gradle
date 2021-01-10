@@ -7,8 +7,8 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.weatherforecast"
-        minSdkVersion 21
+        applicationId "com.example.weather_forcast"
+        minSdkVersion 26
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -29,18 +29,32 @@ android {
 }
 
 dependencies {
-
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'androidx.viewpager:viewpager:1.0.0'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation files('libs\\GsonFormat.jar')
+<<<<<<< HEAD
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+=======
+>>>>>>> 43008ade2a3cfc76ecef04aa5f817347dc92cb1a
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'org.xutils:xutils:3.7.6'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.google.code.gson:gson:2.2.4'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'com.google.android.material:material:1.3.0-alpha02'
+    implementation 'com.android.support:design:28.0.0'
+    implementation 'com.getbase:floatingactionbutton:1.10.1'
+<<<<<<< HEAD
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-14'
+    implementation  'com.scwang.smart:refresh-layout-kernel:2.0.1'
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
 
+
+
+=======
+>>>>>>> 43008ade2a3cfc76ecef04aa5f817347dc92cb1a
 }

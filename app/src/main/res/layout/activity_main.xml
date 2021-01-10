@@ -2,22 +2,30 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_out_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/bg"
     tools:context=".MainActivity">
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> 43008ade2a3cfc76ecef04aa5f817347dc92cb1a
     <RelativeLayout
         android:id="@+id/main_bottom_layout"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:background="#DCDCDC">
+<<<<<<< HEAD
 
+=======
+>>>>>>> 43008ade2a3cfc76ecef04aa5f817347dc92cb1a
         <ImageView
             android:id="@+id/main_iv_add"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:src="@mipmap/icon_add"/>+
+            android:src="@mipmap/icon_add"/>
         <ImageView
             android:id="@+id/main_iv_more"
             android:layout_width="wrap_content"
@@ -34,11 +42,9 @@
     </RelativeLayout>
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/main_vp"
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_above="@id/main_bottom_layout"
-        >
+        android:layout_height="match_parent"
+        android:layout_above="@id/main_bottom_layout">
     </androidx.viewpager.widget.ViewPager>
-
 
 </RelativeLayout>
